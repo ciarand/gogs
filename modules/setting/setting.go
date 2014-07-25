@@ -45,6 +45,8 @@ var (
 	DisableRouterLog   bool
 	CertFile, KeyFile  string
 	StaticRootPath     string
+	SkinName           string
+	SkinPath           string
 
 	// Security settings.
 	InstallLock          bool
@@ -164,6 +166,8 @@ func NewConfigContext() {
 	OfflineMode = Cfg.MustBool("server", "OFFLINE_MODE")
 	DisableRouterLog = Cfg.MustBool("server", "DISABLE_ROUTER_LOG")
 	StaticRootPath = Cfg.MustValue("server", "STATIC_ROOT_PATH", workDir)
+	SkinName = Cfg.MustValue("server", "SKIN_NAME", "default")
+	SkinPath = filepath.Join(StaticRootPath, "skin", SkinName)
 	LogRootPath = Cfg.MustValue("log", "ROOT_PATH", path.Join(workDir, "log"))
 
 	InstallLock = Cfg.MustBool("security", "INSTALL_LOCK")

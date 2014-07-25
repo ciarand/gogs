@@ -56,10 +56,10 @@ func prepareStaticOptions(options []StaticOptions) StaticOptions {
 func Static(directory string, staticOpt ...StaticOptions) martini.Handler {
 	if runtime.GOOS == "windows" {
 		if len(directory) < 2 || directory[1] != ':' {
-			directory = path.Join(setting.StaticRootPath, directory)
+			directory = path.Join(setting.SkinPath, directory)
 		}
 	} else if !path.IsAbs(directory) {
-		directory = path.Join(setting.StaticRootPath, directory)
+		directory = path.Join(setting.SkinPath, directory)
 	}
 
 	dir := http.Dir(directory)

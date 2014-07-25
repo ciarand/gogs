@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"path/filepath"
 
 	"github.com/codegangsta/cli"
 	"github.com/go-martini/martini"
@@ -43,7 +44,7 @@ and it takes care of all the other things for you`,
 
 // checkVersion checks if binary matches the version of temolate files.
 func checkVersion() {
-	data, err := ioutil.ReadFile(path.Join(setting.StaticRootPath, "templates/VERSION"))
+	data, err := ioutil.ReadFile(path.Join(setting.SkinPath, "templates/VERSION"))
 	if err != nil {
 		log.Fatal("Fail to read 'templates/VERSION': %v", err)
 	}
@@ -72,7 +73,7 @@ func runWeb(*cli.Context) {
 
 	// Middlewares.
 	m.Use(middleware.Renderer(middleware.RenderOptions{
-		Directory:  path.Join(setting.StaticRootPath, "templates"),
+		Directory:  filepath.Join(setting.SkinPath, "templates"),
 		Funcs:      []template.FuncMap{base.TemplateFuncs},
 		IndentJSON: true,
 	}))
